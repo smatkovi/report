@@ -6,6 +6,7 @@ from pylatex import Document, Section, Subsection, Tabular, Math, TikZ, Axis, No
     Plot, Figure, Matrix, Alignat
 from pylatex.utils import italic
 import os
+from datetime import datetime
 try:
 	conn = sqlite3.connect("todo.db")
 except Error as e:
@@ -85,5 +86,5 @@ if __name__ == '__main__':
             with doc.create(Figure(position='h!')) as kitten_pic:
                 kitten_pic.add_image(image_filename, width='120px')
                 kitten_pic.add_caption('Look it\'s on its back')
-
-    doc.generate_pdf('full', clean_tex=False)
+    date = datetime.now().strftime("%Y_%m_%d-%I:%M")
+    doc.generate_pdf('report'+date, clean_tex=False)
