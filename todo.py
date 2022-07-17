@@ -1,4 +1,4 @@
-import sqlite3
+import sqlite3, os
 from bottle import route, run, debug, template, request, static_file, error
 # only needed when you run Bottle on mod_wsgi
 from bottle import default_app
@@ -69,6 +69,25 @@ def show_json(json):
 		return {'task': 'This item number does not exist!'}
 	else:
 		return {'task': result[0]}
+@route('/upload')
+def upload():
+        return '''
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                Category:   <input type="text" name="category" />
+                Select a file: <input type="file" name="upload" />
+                <input type="submit" value="Start upload" />
+            </form>
+        '''
+@route('/upload', method='POST')
+def do_upload():
+	category= request.forms.get('category')
+	upload= request.files.get('upload')
+	name, ext = os.path.splitext(upload.filename)
+	#if ext not in ('.jpg'):
+	#	return 'File extension is not png, jpg or jpeg.'
+	#save_path = get_save_path_for_category(category)
+	upload.save("todo"+category+".jpg") # appends upload.filename automatically
+	return 'OK'
 @error(403)
 def mistake403(code):
 	return 'There is a mistake in your url!'
