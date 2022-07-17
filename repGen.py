@@ -17,7 +17,7 @@ if __name__ == '__main__':
     geometry_options = {"tmargin": "1cm", "lmargin": "2.54cm"}
     doc = Document(geometry_options=geometry_options)
     doc.generate_pdf(compiler='pdfLatex')
-    doc.packages.append(Package('section'))
+    doc.packages.append(Package('placeins'))
     with doc.create(Section('The simple stuff')):
         doc.append('Some regular text and some')
         doc.append(italic('italic text. '))
@@ -32,7 +32,7 @@ if __name__ == '__main__':
         for row in rows:
             with doc.create(Subsection('report'+str(row[0]))):
                     doc.append(row[1])
-                    with doc.create(Figure(position='! htb')) as rep_pic:
+                    with doc.create(Figure(position='htb!')) as rep_pic:
                         pic_filename = os.path.join(os.path.dirname(__file__), 'todo'+str(k)+'.jpg')
                         rep_pic.add_image(pic_filename, width='360px')
                         rep_pic.add_caption(pic_filename)
