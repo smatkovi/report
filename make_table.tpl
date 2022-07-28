@@ -9,3 +9,4 @@
 	</tr>
 %end
 </table>
+<a href="http://localhost:8080/new">add new room</a>
