@@ -17,7 +17,7 @@ if __name__ == '__main__':
 
     geometry_options = {"tmargin": "1cm", "lmargin": "2.54cm"}
     doc = Document(geometry_options=geometry_options)
-    doc.generate_pdf(compiler='pdfLatex')
+    doc.generate_pdf(compiler='pdflatex')
     doc.packages.append(Package('placeins'))
     with doc.create(Section('The simple stuff')):
         doc.append('Some regular text and some')
